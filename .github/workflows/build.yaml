@@ -12,7 +12,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Check Maven version
-      run: mvn -V
+      run: mvn -v
     - name: Build
       run: mvn verify -Ptest
   maven_4:
@@ -29,6 +29,6 @@ jobs:
       run: |
         curl 'https://dlcdn.apache.org/maven/maven-4/4.0.0-beta-4/binaries/apache-maven-4.0.0-beta-4-bin.tar.gz' -o maven.tar.gz
         tar xzf maven.tar.gz
-        ./apache-maven-4.0.0-beta-4/bin/mvn -V
+        ./apache-maven-4.0.0-beta-4/bin/mvn -v
     - name: Build
       run: ./apache-maven-4.0.0-beta-4/bin/mvn clean verify -Ptest
