@@ -14,7 +14,7 @@ jobs:
     - name: Check Maven version
       run: mvn -v
     - name: Build
-      run: mvn verify -Ptest
+      run: mvn verify -Ptest -X
   maven_4:
     runs-on: ubuntu-latest
     steps:
@@ -31,4 +31,4 @@ jobs:
         tar xzf maven.tar.gz
         ./apache-maven-4.0.0-beta-4/bin/mvn -v
     - name: Build
-      run: ./apache-maven-4.0.0-beta-4/bin/mvn clean verify -Ptest
+      run: ./apache-maven-4.0.0-beta-4/bin/mvn clean verify -Ptest -X
