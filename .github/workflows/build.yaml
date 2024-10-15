@@ -16,7 +16,7 @@ jobs:
     - name: Check Maven version
       run: mvn -v
     - name: Build
-      run: mvn verify -Ptest -X
+      run: mvn verify -X
     - name: List directories and files
       run: ls
   maven_4:
@@ -37,6 +37,6 @@ jobs:
         tar xzf maven.tar.gz
         ./apache-maven-4.0.0-beta-4/bin/mvn -v
     - name: Build
-      run: ./apache-maven-4.0.0-beta-4/bin/mvn clean verify -Ptest -X
+      run: ./apache-maven-4.0.0-beta-4/bin/mvn verify -X
     - name: List directories and files
       run: ls
