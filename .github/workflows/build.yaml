@@ -1,0 +1,42 @@
+name: Build project
+on: [push, pull_request]
+jobs:
+  maven_3:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: copy settings.xml
+      run: cp settings.template.xml ~/.m2/settings.xml
+    - name: Check Maven version
+      run: mvn -v
+    - name: Build
+      run: mvn verify -Ptest -X
+    - name: List directories and files
+      run: ls
+  maven_4:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: copy settings.xml
+      run: cp settings.template.xml ~/.m2/settings.xml
+    - name: Setup Maven 4
+      run: |
+        curl 'https://dlcdn.apache.org/maven/maven-4/4.0.0-beta-4/binaries/apache-maven-4.0.0-beta-4-bin.tar.gz' -o maven.tar.gz
+        tar xzf maven.tar.gz
+        ./apache-maven-4.0.0-beta-4/bin/mvn -v
+    - name: Build
+      run: ./apache-maven-4.0.0-beta-4/bin/mvn clean verify -Ptest -X
+    - name: List directories and files
+      run: ls
