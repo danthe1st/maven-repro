@@ -23,6 +23,6 @@ jobs:
         mv apache-maven-*/ maven
         ./maven/bin/mvn -v
     - name: Build
-      run: ./maven/bin/mvn verify
+      run: ./maven/bin/mvn clean org.codehaus.mojo:license-maven-plugin:2.4.0:add-third-party
     - name: Build with -X
-      run: ./maven/bin/mvn verify -X
+      run: ./maven/bin/mvn clean org.codehaus.mojo:license-maven-plugin:2.4.0:add-third-party -X
