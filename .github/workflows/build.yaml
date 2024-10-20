@@ -18,7 +18,7 @@ jobs:
         cache: maven
     - name: Setup Maven
       run: |
-        curl "${{ matrix.mavenUrl }}"" -o maven.tar.gz
+        curl "${{ matrix.mavenUrl }}" -o maven.tar.gz
         tar xzf maven.tar.gz
         mv apache-maven-*/ maven
         ./maven/bin/mvn -v
