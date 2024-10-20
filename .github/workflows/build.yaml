@@ -1,0 +1,28 @@
+name: Build project
+on: [push, pull_request]
+jobs:
+  maven:
+    strategy:
+      matrix:
+        mavenUrl:
+          - "https://dlcdn.apache.org/maven/maven-4/4.0.0-beta-4/binaries/apache-maven-4.0.0-beta-4-bin.tar.gz"
+          - "https://repository.apache.org/content/repositories/maven-2228/org/apache/maven/apache-maven/4.0.0-beta-5/apache-maven-4.0.0-beta-5-bin.tar.gz"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Setup Maven
+      run: |
+        curl 'https://dlcdn.apache.org/maven/maven-4/4.0.0-beta-4/binaries/apache-maven-4.0.0-beta-4-bin.tar.gz' -o maven.tar.gz
+        tar xzf maven.tar.gz
+        mv apache-maven-*/ maven
+        ./maven/bin/mvn -v
+    - name: Build
+      run: ./maven/bin/mvn verify
+    - name: Build with -X
+      run: ./maven/bin/mvn verify -X
